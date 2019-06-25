@@ -68,16 +68,14 @@ print(f3(8))     # Should print 9
 # Google "python keyword arguments".
 
 # YOUR CODE HERE
-# def f4(obj, **kwargs):
-#     if isinstance(obj, collections.Mapping):
-#         for k, v in obj.items():
-#             print("key: %s, value: %s" % (k, v))
-#     else:
-#         for key, value in kwargs.items():
-#             print("key: %s, value: %s" % (key, value))
-def f4(**kwargs):
-    if kwargs:
-        print("Hi")
+def f4(*args, **kwargs):
+    if args:
+        for arg in args:
+            for key, value in arg.items():
+                print("key: %s, value: %s" % (key, value))
+    else:
+        for key, value in kwargs.items():
+            print("key: %s, value: %s" % (key, value))
 
 
 # Should print
@@ -97,4 +95,4 @@ d = {
 }
 
 # What thing do you have to add to make this work?
-# f4(d)
+f4(d)
