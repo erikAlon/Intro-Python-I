@@ -6,12 +6,33 @@
 
 # YOUR CODE HERE
 
+
+import collections
+
+
+def f1(x, y):
+    return x + y
+
+
 print(f1(1, 2))
 
 # Write a function f2 that takes any number of integer arguments and prints the
 # sum. Google for "python arbitrary arguments" and look for "*args"
 
 # YOUR CODE HERE
+
+
+def f2(argl, *args):
+    result = 0
+    if isinstance(argl, collections.Sequence):
+        for arg in argl:
+            result += arg
+    else:
+        result += argl
+        for arg in args:
+            result += arg
+    return result
+
 
 print(f2(1))                    # Should print 1
 print(f2(1, 3))                 # Should print 4
@@ -29,6 +50,11 @@ print(f2(a))    # Should print 22
 
 # YOUR CODE HERE
 
+
+def f3(x, y=1):
+    return x + y
+
+
 print(f3(1, 2))  # Should print 3
 print(f3(8))     # Should print 9
 
@@ -42,6 +68,17 @@ print(f3(8))     # Should print 9
 # Google "python keyword arguments".
 
 # YOUR CODE HERE
+# def f4(obj, **kwargs):
+#     if isinstance(obj, collections.Mapping):
+#         for k, v in obj.items():
+#             print("key: %s, value: %s" % (k, v))
+#     else:
+#         for key, value in kwargs.items():
+#             print("key: %s, value: %s" % (key, value))
+def f4(**kwargs):
+    if kwargs:
+        print("Hi")
+
 
 # Should print
 # key: a, value: 12
@@ -60,4 +97,4 @@ d = {
 }
 
 # What thing do you have to add to make this work?
-f4(d)
+# f4(d)
