@@ -22,3 +22,47 @@ and does the following:
 import sys
 import calendar
 from datetime import datetime
+
+
+class ArgumentsError(Exception):
+    __module__ = Exception.__module__
+
+
+c = calendar.Calendar(6)
+a = sys.argv
+t = datetime.now()
+tY = t.year
+tM = t.month
+arg_length = len(a)
+
+try:
+    if arg_length == 1:
+        cal = calendar.month(tY, tM)
+        print(cal)
+    elif arg_length == 2:
+        arg1 = int(round(float(a[1])))
+        if arg1 >= 1 and arg1 <= 12:
+            cal = calendar.month(tY, arg1)
+            print(cal)
+        else:
+            raise ArgumentsError(
+                "This program only takes a month between 1 and 12 as first argument")
+    elif arg_length == 3:
+        arg1 = int(round(float(a[1])))
+        arg2 = int(round(float(a[2])))
+        if arg1 >= 1 and arg1 <= 12:
+            if arg2 >= 1 and arg2 <= tY:
+                cal = calendar.month(arg2, arg1)
+                print(cal)
+            else:
+                raise ArgumentsError(
+                    "This program only takes a year between 1 and %d as second argument" % tY)
+        else:
+            raise ArgumentsError(
+                "This program only takes a month between 1 and 12 as first argument")
+    else:
+        raise ArgumentsError("This program only uses less than 3 arguments")
+except ArgumentsError:
+    raise
+except ValueError:
+    raise ValueError("This program only uses numbers as arguments")
